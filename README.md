@@ -7,6 +7,7 @@ This project is a Host MFE that implements the Module Federation pattern describ
 - [Rsbuild Module Federation 2.0 Project (Host)](#rsbuild-module-federation-20-project-host)
   - [Install, Run and Build](#install-run-and-build)
   - [Development Environment](#development-environment)
+    - [Remote MFEs](#remote-mfes)
   - [General Configuration](#general-configuration)
     - [Update tsconfig.json](#update-tsconfigjson)
     - [Add `@module-federation/enhanced` npm module](#add-module-federationenhanced-npm-module)
@@ -38,6 +39,14 @@ This project provides the source code for the host (consumer) application. Befor
 | host | localhost:3000 |
 | remote_one | localhost:3001 |
 | remote_two | localhost:3002 |
+
+### Remote MFEs
+
+You may override MFE remotes defined within `./remotes.dev.json` by setting a `REMOTES` environment variable.
+
+```bash
+export REMOTES="{\"remote_one\":\"http://localhost:3001\"}"
+```
 
 ## General Configuration
 
