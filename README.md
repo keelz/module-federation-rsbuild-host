@@ -2,47 +2,35 @@
 # Rsbuild Module Federation 2.0 Project (Host)
 
 - [Rsbuild Module Federation 2.0 Project (Host)](#rsbuild-module-federation-20-project-host)
-  - [Setup](#setup)
-  - [Get Started](#get-started)
-- [Post-Init Configuration](#post-init-configuration)
-  - [Update tsconfig.json](#update-tsconfigjson)
-  - [Add `@module-federation/enhanced` npm module](#add-module-federationenhanced-npm-module)
-  - [Refactor `./src/index.tsx`](#refactor-srcindextsx)
-  - [Implement `@module-federation/enhanced/rspack` plugin](#implement-module-federationenhancedrspack-plugin)
+  - [Install](#install)
+  - [Development Environment](#development-environment)
+  - [General Configuration](#general-configuration)
+    - [Update tsconfig.json](#update-tsconfigjson)
+    - [Add `@module-federation/enhanced` npm module](#add-module-federationenhanced-npm-module)
+    - [Refactor `./src/index.tsx`](#refactor-srcindextsx)
+    - [Implement `@module-federation/enhanced/rspack` plugin](#implement-module-federationenhancedrspack-plugin)
 
-## Setup
-
-Install the dependencies:
+## Install
 
 ```bash
-pnpm install
+pnpm i
 ```
 
-## Get Started
+## Development Environment
 
-Start the dev server:
+This project provides the source code for the host (consumer) application. Before starting the host development server you need to make sure that the project remotes are up and running. This project consumes two hosts; `remote_one` and `remote_two`. The remote servers MUST be up and available on the local system otherwise this application will fail to render.
 
-```bash
-pnpm dev
-```
+| Server | Port |
+| ----------- | ----------- |
+| host | localhost:3000 |
+| remote_one | localhost:3001 |
+| remote_two | localhost:3002 |
 
-Build the app for production:
+## General Configuration
 
-```bash
-pnpm build
-```
+This project is Micro-Frontend host application that implements [Module Federation 2.0](https://module-federation.io/guide/start/index.html) patterns. Rspack and Rsbuild provide native support for Module Federation but the setup requires a little work and has very distinct differences froma a vanilla Rsbuild project.
 
-Preview the production build locally:
-
-```bash
-pnpm preview
-```
-
-# Post-Init Configuration
-
-This project is Micro-Frontend host application that implements [Module Federation 2.0](https://module-federation.io/guide/start/index.html) patterns. Rspack and Rsbuild provide native support for Module Federation but the setup requires a little work.
-
-## Update tsconfig.json
+### Update tsconfig.json
 
 module federation with rspack/rsbuild automatically writes types from remotes to the `./@mf-types` directory. We need to update the `tsconfig.jsion` file to recognize this for our dev/build environments.
 
@@ -57,7 +45,7 @@ module federation with rspack/rsbuild automatically writes types from remotes to
 }
 ```
 
-## Add `@module-federation/enhanced` npm module
+### Add `@module-federation/enhanced` npm module
 
 [Module Federation v2.0](https://rsbuild.dev/guide/advanced/module-federation#module-federation-v20) requires the `@module-federation/enhanced` plugin so we add it to the project as a development dependency with pnpm.
 
@@ -65,7 +53,7 @@ module federation with rspack/rsbuild automatically writes types from remotes to
 pnpm add -D @module-federation/enhanced
 ```
 
-## Refactor `./src/index.tsx`
+### Refactor `./src/index.tsx`
 
 After experiencing several out-of-the-box failures with implementing Module Federation, I found that implementing a standard `index.ts` file with React that loads the React library and the root `<App />` into the root element of the DOM is not supported.
 
@@ -96,7 +84,7 @@ if (container) {
 }
 ```
 
-## Implement `@module-federation/enhanced/rspack` plugin
+### Implement `@module-federation/enhanced/rspack` plugin
 
 To implement [Module Federation v2.0 with rspack](https://module-federation.io/guide/basic/rspack.html) we modify the `./rsbuild.config.ts` file.
 
