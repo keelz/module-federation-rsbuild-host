@@ -1,4 +1,4 @@
-# post-install config
+# post-rsbuild configuration
 
 ## update tsconfig.json
 
@@ -21,6 +21,37 @@ module federation with rspack/rsbuild automatically writes types from remotes to
 
 ```bash
 pnpm add -D @module-federation/enhanced
+```
+
+## Refactor `./src/index.tsx`
+
+After experiencing several out-of-the-box failures with implementing Module Federation, I found that implementing a standard `index.ts` file with React that loads the React library and the root `<App />` into the root element of the DOM is not supported.
+
+To resolve this issue, which appears to be some sort of race condition, we abstract the normal `index.ts` implementation to `bootstrap.ts` and replace the `index.ts` implementation with an import statement.
+
+./src/index.ts
+
+```typescript
+import('./bootstrap')
+```
+
+./src/bootstrap.tsx (new file)
+
+```typescript
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+const container = document.getElementById('root');
+
+if (container) {
+  const root = createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
+}
 ```
 
 # Rsbuild Project
