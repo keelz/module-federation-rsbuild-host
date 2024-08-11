@@ -9,6 +9,7 @@
     - [Add `@module-federation/enhanced` npm module](#add-module-federationenhanced-npm-module)
     - [Refactor `./src/index.tsx`](#refactor-srcindextsx)
     - [Implement `@module-federation/enhanced/rspack` plugin](#implement-module-federationenhancedrspack-plugin)
+  - [Gotchas](#gotchas)
 
 ## Install
 
@@ -121,3 +122,9 @@ export default defineConfig({
   plugins: [pluginReact()],
 });
 ```
+
+## Gotchas
+
+1. This project is a Module Federation consumer. [READ THE DOCS](https://module-federation.io/guide/start/index.html).
+2. Run the application in localdev BEFORE trying to implement anything new provided by a remote MFE.
+3. Make sure the project remote dependencies are up and available before running the host MFE local development environment.
