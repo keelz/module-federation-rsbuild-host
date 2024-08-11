@@ -15,6 +15,14 @@ module federation with rspack/rsbuild automatically writes types from remotes to
 }
 ```
 
+## Add `@module-federation/enhanced` npm module
+
+[Module Federation v2.0](https://rsbuild.dev/guide/advanced/module-federation#module-federation-v20) requires the `@module-federation/enhanced` plugin so we add it to the project as a development dependency with pnpm.
+
+```bash
+pnpm add -D @module-federation/enhanced
+```
+
 # Rsbuild Project
 
 ## Setup
