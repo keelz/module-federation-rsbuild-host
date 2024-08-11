@@ -1,20 +1,32 @@
+[RFC-2119](https://www.rfc-editor.org/rfc/rfc2119)
 
 # Rsbuild Module Federation 2.0 Project (Host)
 
+This project is a Host MFE that implements the Module Federation pattern described within the [Quick Start Guide](https://module-federation.io/guide/start/quick-start.html) from the Module Federation documentation.
+
 - [Rsbuild Module Federation 2.0 Project (Host)](#rsbuild-module-federation-20-project-host)
-  - [Install](#install)
+  - [Install, Run and Build](#install-run-and-build)
   - [Development Environment](#development-environment)
   - [General Configuration](#general-configuration)
     - [Update tsconfig.json](#update-tsconfigjson)
     - [Add `@module-federation/enhanced` npm module](#add-module-federationenhanced-npm-module)
-    - [Refactor `./src/index.tsx`](#refactor-srcindextsx)
+    - [Refactor `./src/index.tsx` to asynchronous](#refactor-srcindextsx-to-asynchronous)
     - [Implement `@module-federation/enhanced/rspack` plugin](#implement-module-federationenhancedrspack-plugin)
   - [Gotchas](#gotchas)
+- [RTFM](#rtfm)
+- [Glossary of Terms](#glossary-of-terms)
+  - [Module Federation](#module-federation)
+  - [Producer (Remote)](#producer-remote)
+  - [Consumer (Host)](#consumer-host)
+  - [Micro-frontend (MFE)](#micro-frontend-mfe)
+  - [Bundler](#bundler)
 
-## Install
+## Install, Run and Build
 
 ```bash
 pnpm i
+pnpm dev
+pnpm build
 ```
 
 ## Development Environment
@@ -54,7 +66,7 @@ module federation with rspack/rsbuild automatically writes types from remotes to
 pnpm add -D @module-federation/enhanced
 ```
 
-### Refactor `./src/index.tsx`
+### Refactor `./src/index.tsx` to asynchronous
 
 After experiencing several out-of-the-box failures with implementing Module Federation, I found that implementing a standard `index.ts` file with React that loads the React library and the root `<App />` into the root element of the DOM is not supported.
 
@@ -63,12 +75,11 @@ To resolve this issue, which appears to be some sort of race condition, we abstr
 ./src/index.ts
 
 ```typescript
+// Move src/index.tsx to src/bootstrap.tsx file
+// src/index.tsx SHOULD be renamed to src/index.ts
 import('./bootstrap')
-```
 
-./src/bootstrap.tsx (new file)
-
-```typescript
+// src/bootstrap.tsx
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
@@ -128,3 +139,42 @@ export default defineConfig({
 1. This project is a Module Federation consumer. [READ THE DOCS](https://module-federation.io/guide/start/index.html).
 2. Run the application in localdev BEFORE trying to implement anything new provided by a remote MFE.
 3. Make sure the project remote dependencies are up and available before running the host MFE local development environment.
+
+# RTFM
+
+- [Module Federation](https://module-federation.io/guide/start/index.html)
+- [Rspack](https://rspack.dev/guide/start/introduction)
+- [Rsbuild](https://rsbuild.dev/guide/start/index)
+
+# Glossary of Terms
+
+## Module Federation
+
+Module Federation (MF) is an architectural pattern for partitioning JavaScript applications, similar to microservices on the server side. It allows you to share code and resources between multiple JavaScript applications (or micro frontends). If an application using federated modules lacks the dependencies required by the federated code, the missing dependencies will be downloaded from the build source or a peer that is able to share it.
+
+This enables the creation of micro-frontend style applications where multiple systems can share code and update dynamically without the need to rebuild the entire application.
+
+This also enabled a wider set of use cases on the server side, as federation operates universally, it has several dynamic backend use cases.
+
+## Producer (Remote)
+
+An application that exposes other modules to be consumed by other JavaScript applications through the Module Federation build plugin with the exposes configuration is referred to as a Provider (Producer) in Module Federation. A Producer can also act as a Consumer.
+
+## Consumer (Host)
+
+An application that consumes modules from other Producers through the Module Federation build plugin with the remotes configuration is referred to as a Consumer (Consumer). A Consumer can also act as a Producer.
+
+## Micro-frontend (MFE)
+
+Micro-frontend (MFE) is an architectural style similar to microservices, where a cohesive single product is composed of multiple independently delivered frontend applications. It breaks down a frontend application into smaller, simpler applications that can be independently developed, tested, and deployed, while still appearing as a single product to the user.
+
+It primarily addresses two issues:
+
+The increasing size and maintenance difficulty of applications as they evolve through iterations.
+The low efficiency of cross-team or cross-department collaboration in project development.
+
+## Bundler
+
+Refers to module bundling tools such as Rspack, Webpack.
+
+The main goal of a bundler is to package JavaScript, CSS, and other files together. The packaged files can be used in browsers, Node.js, and other environments. When a Bundler processes a web application, it constructs a dependency graph that includes all the modules requires by the application and then packages all modules into one or more bundles.

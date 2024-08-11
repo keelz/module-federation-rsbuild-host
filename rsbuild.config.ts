@@ -2,6 +2,15 @@ import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 
+const getRemotes = () => {
+  if (process.env.REMOTES) {
+    console.warn('REMOTES FROM ENV');
+    return JSON.parse(process.env.REMOTES);
+  }
+  console.warn('REMOTES FROM DEV');
+  return require('./remotes.dev.json');
+};
+
 export default defineConfig({
   server: { port: 3000 },
   tools: {
@@ -9,10 +18,7 @@ export default defineConfig({
       appendPlugins([
         new ModuleFederationPlugin({
           name: 'host',
-          remotes: {
-            remote_one: 'remote_one@http://localhost:3001/mf-manifest.json',
-            remote_two: 'remote_two@http://localhost:3002/mf-manifest.json',
-          },
+          remotes: getRemotes(),
           shared: ['react', 'react-dom'],
         }),
       ]);
