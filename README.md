@@ -1,10 +1,12 @@
 [RFC-2119](https://www.rfc-editor.org/rfc/rfc2119)
 
-# Rsbuild Module Federation 2.0 Project (Host)
+# mfe-rsbuild-typescript-react-mui (host)
 
 This project is a Host MFE that implements the Module Federation pattern described within the [Quick Start Guide](https://module-federation.io/guide/start/quick-start.html) from the Module Federation documentation.
 
-- [Rsbuild Module Federation 2.0 Project (Host)](#rsbuild-module-federation-20-project-host)
+This project was developed to demonstrate the harmonious coexistence of Module Federation with the Rsbuild bundler using TypeScript, React, Testing Library, and Material UI which when combined offer a very diverse foundation for developing modern web applications. The motivation for this project stems from a demand to develop feature rich administrative dashboards within a distributed development environment.
+
+- [mfe-rsbuild-typescript-react-mui (host)](#mfe-rsbuild-typescript-react-mui-host)
   - [Install, Run and Build](#install-run-and-build)
   - [Development Environment](#development-environment)
     - [Remote MFEs](#remote-mfes)
@@ -177,6 +179,7 @@ pnpm test -- -h
 - [Rsbuild Examples](https://github.com/rspack-contrib/rspack-examples/tree/main/rsbuild/react-jest)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 - [Jest](https://jestjs.io/docs/getting-started)
+- [Material UI](https://mui.com/material-ui/getting-started/)
 
 # Glossary of Terms
 
