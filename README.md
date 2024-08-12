@@ -13,6 +13,7 @@ This project is a Host MFE that implements the Module Federation pattern describ
     - [Add `@module-federation/enhanced` npm module](#add-module-federationenhanced-npm-module)
     - [Refactor `./src/index.tsx` to asynchronous](#refactor-srcindextsx-to-asynchronous)
     - [Implement `@module-federation/enhanced/rspack` plugin](#implement-module-federationenhancedrspack-plugin)
+  - [Testing](#testing)
   - [Gotchas](#gotchas)
 - [RTFM](#rtfm)
 - [Glossary of Terms](#glossary-of-terms)
@@ -31,6 +32,7 @@ This project is a Host MFE that implements the Module Federation pattern describ
 pnpm i
 pnpm dev
 pnpm build
+pnpm test
 ```
 
 ## Development Environment
@@ -144,6 +146,20 @@ export default defineConfig({
   },
   plugins: [pluginReact()],
 });
+```
+
+## Testing
+
+This project is bootstrapped with Jest and testing-library/react.
+
+```bash
+pnpm test
+```
+
+To find documentation on command line options for Jest run the following:
+
+```bash
+pnpm test -- -h
 ```
 
 ## Gotchas

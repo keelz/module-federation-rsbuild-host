@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders the main page 1`] = `
+<h1>
+  Module Federation Rsbuild with React
+</h1>
+`;
