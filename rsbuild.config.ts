@@ -66,6 +66,7 @@ export default defineConfig({
               requiredVersion: dependencies['react-dom'],
             },
             '@emotion/react': {
+              eager: true,
               singleton: true,
               requiredVersion: dependencies['@emotion/react'],
             },
