@@ -12,6 +12,33 @@ const getRemotes = (envRemotes: string | undefined) => {
 };
 
 export default defineConfig({
+  html: {
+    title: 'My App',
+    tags: [
+      {
+        tag: 'link',
+        attrs: {
+          rel: 'preconnect',
+          hreft: 'https://fonts.googleapis.com',
+        },
+      },
+      {
+        tag: 'link',
+        attrs: {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: true,
+        },
+      },
+      {
+        tag: 'link',
+        attrs: {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
+        },
+      },
+    ],
+  },
   server: { port: 3000 },
   tools: {
     rspack: (_, { appendPlugins }) => {
