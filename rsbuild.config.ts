@@ -2,6 +2,8 @@ import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 
+const dependencies = require('./package.json').dependencies;
+
 const getRemotes = (envRemotes: string | undefined) => {
   if (envRemotes !== undefined) {
     console.warn('REMOTES FROM ENV');
@@ -53,7 +55,25 @@ export default defineConfig({
         new ModuleFederationPlugin({
           name: 'host',
           remotes: getRemotes(process.env.REMOTES),
-          shared: ['react', 'react-dom'],
+          shared: {
+            ...dependencies,
+            'react': {
+              singleton: true,
+              requiredVersion: dependencies['react'],
+            },
+            'react-dom': {
+              singleton: true,
+              requiredVersion: dependencies['react-dom'],
+            },
+            '@emotion/react': {
+              singleton: true,
+              requiredVersion: dependencies['@emotion/react'],
+            },
+            '@mui/material': {
+              singleton: true,
+              requiredVersion: dependencies['@mui/material'],
+            },
+          },
         }),
       ]);
     },
