@@ -37,6 +37,13 @@ export default defineConfig({
           href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
         },
       },
+      {
+        tag: 'link',
+        attrs: {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+        },
+      },
     ],
   },
   server: { port: 3000 },
