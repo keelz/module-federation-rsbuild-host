@@ -21,6 +21,9 @@ This project is a Host MFE that implements the Module Federation pattern describ
   - [Consumer (Host)](#consumer-host)
   - [Micro-frontend (MFE)](#micro-frontend-mfe)
   - [Bundler](#bundler)
+- [Notes](#notes)
+  - [Automation](#automation)
+    - [rsbuild.config.ts](#rsbuildconfigts)
 
 ## Install, Run and Build
 
@@ -187,3 +190,39 @@ The low efficiency of cross-team or cross-department collaboration in project de
 Refers to module bundling tools such as Rspack, Webpack.
 
 The main goal of a bundler is to package JavaScript, CSS, and other files together. The packaged files can be used in browsers, Node.js, and other environments. When a Bundler processes a web application, it constructs a dependency graph that includes all the modules requires by the application and then packages all modules into one or more bundles.
+
+# Notes
+
+## Automation
+
+### rsbuild.config.ts
+
+I have implemented a solution that supports moving the `remotes` portion of the configuration out to either an environment variable or a .json file. When the environment variable is set the value takes precedence over the `remotes.dev.json` file. I did this so that environment variables could be set within build pipelines allowing for a clean developer experience without the need to configure environment variables on the local host.
+
+```json
+// remotes.dev.json
+{
+  "remote_one": "http://localhost:3001",
+  "remote_two": "http://localhost:3002"
+}
+```
+
+```bash
+export REMOTES="{\"remote_one\":\"http://localhost:3001\",\"remote_two\":\"http://localhost:3002\"}"
+```
+
+Related code
+
+```typescript
+// rsbuild.config.ts
+// probably a better way to do this but it works and it is testable
+const getRemotes = (envRemotes: string | undefined) => {
+  if (envRemotes !== undefined) {
+    console.warn('REMOTES FROM ENV');
+    return JSON.parse(envRemotes);
+  }
+  console.warn('REMOTES FROM DEV');
+  // rsbuild includes native support for json serialization
+  return require('./remotes.dev.json');
+};
+```

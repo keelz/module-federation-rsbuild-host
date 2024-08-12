@@ -2,10 +2,10 @@ import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
 
-const getRemotes = () => {
-  if (process.env.REMOTES) {
+const getRemotes = (envRemotes: string | undefined) => {
+  if (envRemotes !== undefined) {
     console.warn('REMOTES FROM ENV');
-    return JSON.parse(process.env.REMOTES);
+    return JSON.parse(envRemotes);
   }
   console.warn('REMOTES FROM DEV');
   return require('./remotes.dev.json');
@@ -18,7 +18,7 @@ export default defineConfig({
       appendPlugins([
         new ModuleFederationPlugin({
           name: 'host',
-          remotes: getRemotes(),
+          remotes: getRemotes(process.env.REMOTES),
           shared: ['react', 'react-dom'],
         }),
       ]);
