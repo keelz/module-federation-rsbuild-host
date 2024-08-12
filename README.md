@@ -170,9 +170,13 @@ pnpm test -- -h
 
 # RTFM
 
+- [React](https://react.dev/reference/react)
 - [Module Federation](https://module-federation.io/guide/start/index.html)
 - [Rspack](https://rspack.dev/guide/start/introduction)
 - [Rsbuild](https://rsbuild.dev/guide/start/index)
+- [Rsbuild Examples](https://github.com/rspack-contrib/rspack-examples/tree/main/rsbuild/react-jest)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+- [Jest](https://jestjs.io/docs/getting-started)
 
 # Glossary of Terms
 
