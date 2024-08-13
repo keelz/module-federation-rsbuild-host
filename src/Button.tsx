@@ -1,14 +1,16 @@
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-
-const handleClick = () => console.warn('host, checking in');
+import { useDispatch } from 'react-redux';
+import { increment } from './features/counter/counterSlice';
 
 export default function ButtonUsoage() {
+  const dispatch = useDispatch();
+
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Button onClick={handleClick}>host</Button>
+        <Button onClick={() => dispatch(increment())}>host</Button>
       </Grid>
     </Grid>
-  )
+  );
 }
