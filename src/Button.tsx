@@ -6,10 +6,12 @@ import { increment } from './features/counter/counterSlice';
 export default function ButtonUsoage() {
   const dispatch = useDispatch();
 
+  const handleClick = () => dispatch(increment());
+
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Button onClick={() => dispatch(increment())}>host</Button>
+        <Button onClick={handleClick}>host</Button>
       </Grid>
     </Grid>
   );
