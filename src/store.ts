@@ -1,12 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './features/counter/counterSlice';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
-export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
-});
+const federatedSlices = {
+  counter: await import("remote_one/counter-slice").then(
+    (module) => module.default.reducer
+  ),
+};
 
-export type RootState = ReturnType<typeof store.getState>;
+const initStore = async () => {
+  const store = configureStore({
+    reducer: combineReducers({
+      ...federatedSlices,
+    }),
+  });
+  return store;
+}
 
-export type AppDispatch = typeof store.dispatch;
+export default initStore;

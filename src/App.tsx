@@ -1,14 +1,12 @@
-import './App.css';
 import Grid from '@mui/material/Grid';
+import { useSelector } from 'react-redux';
 import RemoteOneButton from 'remote_one/button';
 import RemoteTwoButton from 'remote_two/button';
-import { useSelector } from 'react-redux';
 import HostButton from './Button';
-import { RootState } from './store';
+
+import './App.css';
 
 const App = () => {
-  const count = useSelector((state: RootState) => state.counter.value);
-
   return (
     <div className="content">
       <Grid container spacing={2}>
@@ -17,9 +15,6 @@ const App = () => {
         </Grid>
         <Grid item xs={12}>
           <p>TypeScript, React, MUI, Testing Library</p>
-        </Grid>
-        <Grid item xs={12}>
-          Count is {count}
         </Grid>
         <Grid item xs={4}>
           <HostButton />
