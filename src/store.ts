@@ -1,8 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
 const federatedSlices = {
-  counter: await import("remote_one/counter-slice").then(
-    (module) => module.default.reducer
+  remote_one: await import("remote_one/reducer").then(
+    (module) => module.default
   ),
 };
 
