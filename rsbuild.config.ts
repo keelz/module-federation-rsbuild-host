@@ -15,7 +15,7 @@ const getRemotes = (envRemotes: string | undefined) => {
 
 export default defineConfig({
   html: {
-    title: 'My MFE App',
+    title: 'Host',
     tags: [
       {
         tag: 'link',

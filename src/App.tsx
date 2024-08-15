@@ -4,7 +4,6 @@ import RemoteOneButton from 'remote_one/button';
 import { RemoteOneState } from 'remote_one/state';
 import RemoteTwoButton from 'remote_two/button';
 import { RemoteTwoState } from 'remote_two/state';
-import HostButton from './Button';
 
 import './App.css';
 
@@ -18,17 +17,16 @@ const App = () => {
           <h1>Rsbuild Module Federation</h1>
         </Grid>
         <Grid item xs={12}>
-          <p>TypeScript, React, MUI, Testing Library</p>
-          <p>Counter One: {cOne}</p>
-          <p>Counter Two: {cTwo}</p>
+          <p>TypeScript, React, MUI, Redux Toolkit, Testing Library</p>
+          <p>Remote One Counter: {cOne}</p>
+          <p>Remote Two Counter: {cTwo}</p>
         </Grid>
-        <Grid item xs={4}>
-          <HostButton />
-        </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
+          <h2>Remote One</h2>
           <RemoteOneButton />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
+          <h2>Remote Two</h2>
           <RemoteTwoButton />
         </Grid>
       </Grid>
