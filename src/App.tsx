@@ -1,33 +1,30 @@
 import Grid from '@mui/material/Grid';
 import { useSelector } from 'react-redux';
-import RemoteOneButton from 'remote_one/button';
-import { RemoteOneState } from 'remote_one/state';
-import RemoteTwoButton from 'remote_two/button';
-import { RemoteTwoState } from 'remote_two/state';
+import RemoteOneSharedComponent from 'remote_one/SharedComponent';
+import RemoteTwoSharedComponent from 'remote_two/SharedComponent';
 
 import './App.css';
 
 const App = () => {
-  const cOne = useSelector((s: RemoteOneState) => s.remote_one.counter.value);
-  const cTwo = useSelector((s: RemoteTwoState) => s.remote_two.counter.value);
+  const cOne = useSelector((s: RemoteOne.State) => s.remote_one.counter.value);
+  const cTwo = useSelector((s: RemoteTwo.State) => s.remote_two.counter.value);
+
   return (
     <div className="content">
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <h1>Rsbuild Module Federation</h1>
+          <p>TypeScript, React, MUI, Redux Toolkit, Testing Library</p>
         </Grid>
         <Grid item xs={12}>
-          <p>TypeScript, React, MUI, Redux Toolkit, Testing Library</p>
-          <p>Remote One Counter: {cOne}</p>
-          <p>Remote Two Counter: {cTwo}</p>
+          <p>Remote One: {cOne}</p>
+          <p>Remote Two: {cTwo}</p>
         </Grid>
         <Grid item xs={6}>
-          <h2>Remote One</h2>
-          <RemoteOneButton />
+          <RemoteOneSharedComponent />
         </Grid>
         <Grid item xs={6}>
-          <h2>Remote Two</h2>
-          <RemoteTwoButton />
+          <RemoteTwoSharedComponent />
         </Grid>
       </Grid>
     </div>
