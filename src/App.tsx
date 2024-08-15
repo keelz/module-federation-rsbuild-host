@@ -13,16 +13,19 @@ const App = () => {
     <div className="content">
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <h1>Rsbuild Module Federation</h1>
-          <p>TypeScript, React, MUI, Redux Toolkit, Testing Library</p>
+          <h1>Host</h1>
         </Grid>
         <Grid item xs={12}>
           <p>Remote One: {cOne}</p>
           <p>Remote Two: {cTwo}</p>
         </Grid>
+
+        {/* Remote One Domain */}
         <Grid item xs={6}>
           <RemoteOneSharedComponent />
         </Grid>
+
+        {/* Remote Two Domain */}
         <Grid item xs={6}>
           <RemoteTwoSharedComponent />
         </Grid>

@@ -78,6 +78,7 @@ export default defineConfig({
               requiredVersion: dependencies['@emotion/react'],
             },
             '@mui/material': {
+              eager: true,
               singleton: true,
               requiredVersion: dependencies['@mui/material'],
             },
