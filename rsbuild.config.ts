@@ -77,19 +77,6 @@ export default defineConfig({
               singleton: true,
               requiredVersion: dependencies['@emotion/react'],
             },
-            '@mui/material': {
-              eager: true,
-              singleton: true,
-              requiredVersion: dependencies['@mui/material'],
-            },
-            '@reduxjs/toolkit': {
-              singleton: true,
-              requiredVersion: dependencies['@reduxjs/toolkit'],
-            },
-            'react-redux': {
-              singleton: true,
-              requiredVersion: dependencies['react-redux']
-            },
           },
         }),
       ]);
