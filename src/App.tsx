@@ -1,13 +1,14 @@
 import Grid from '@mui/material/Grid';
 import { useSelector } from 'react-redux';
 import RemoteOneButton from 'remote_one/button';
+import { RemoteOneState } from 'remote_one/state';
 import RemoteTwoButton from 'remote_two/button';
 import HostButton from './Button';
 
 import './App.css';
 
 const App = () => {
-  const c = useSelector((s: any) => s.remote_one.counter.value);
+  const c = useSelector((s: RemoteOneState) => s.remote_one.counter.value);
   return (
     <div className="content">
       <Grid container spacing={2}>
