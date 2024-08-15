@@ -2,10 +2,20 @@ declare const store: import("@reduxjs/toolkit").EnhancedStore<{
     remote_one: {
         counter: import("./features/counter.slice").CounterState;
     };
+    remote_two: {
+        counter: {
+            value: number;
+        };
+    };
 }, import("@reduxjs/toolkit").UnknownAction, import("@reduxjs/toolkit").Tuple<[import("@reduxjs/toolkit").StoreEnhancer<{
     dispatch: import("@reduxjs/toolkit").ThunkDispatch<{
         remote_one: {
             counter: import("./features/counter.slice").CounterState;
+        };
+        remote_two: {
+            counter: {
+                value: number;
+            };
         };
     }, undefined, import("@reduxjs/toolkit").UnknownAction>;
 }>, import("@reduxjs/toolkit").StoreEnhancer]>>;
@@ -15,5 +25,10 @@ export type AppDispatch = typeof store.dispatch;
 export declare const useAppDispatch: () => import("@reduxjs/toolkit").ThunkDispatch<{
     remote_one: {
         counter: import("./features/counter.slice").CounterState;
+    };
+    remote_two: {
+        counter: {
+            value: number;
+        };
     };
 }, undefined, import("@reduxjs/toolkit").UnknownAction> & import("@reduxjs/toolkit").Dispatch<import("@reduxjs/toolkit").UnknownAction>;
