@@ -64,7 +64,9 @@ export default defineConfig({
     assetPrefix: 'https://yourdomain.com',
   },
   tools: {
-    rspack: (_, { appendPlugins }) => {
+    rspack: (config, { appendPlugins }) => {
+      // you need to set a unique value that is not equal to other applications
+      config.output!.uniqueName = 'host';
       appendPlugins([
         new ModuleFederationPlugin({
           name: 'host',
@@ -79,6 +81,7 @@ export default defineConfig({
               singleton: true,
               requiredVersion: dependencies['react-dom'],
             },
+            // emotion/react doesn't play nice with others and needs to be in timeout!
             '@emotion/react': {
               eager: true,
               singleton: true,
