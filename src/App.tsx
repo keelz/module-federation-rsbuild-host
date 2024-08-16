@@ -4,10 +4,11 @@ import RemoteOneSharedComponent from 'remote_one/SharedComponent';
 import RemoteTwoSharedComponent from 'remote_two/SharedComponent';
 
 import './App.css';
+import { RootState } from './store';
 
 const App = () => {
-  const cOne = useSelector((s: RemoteOne.State) => s.remote_one.counter.value);
-  const cTwo = useSelector((s: RemoteTwo.State) => s.remote_two.counter.value);
+  const cOne = useSelector((s: RootState) => s.remote_one.counter.value);
+  const cTwo = useSelector((s: RootState) => s.remote_two.counter.value);
 
   return (
     <div className="content">

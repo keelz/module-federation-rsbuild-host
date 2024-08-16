@@ -1,21 +1,17 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers, createStore } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import remoteOneReducer from 'remote_one/reducer';
+import remoteTwoReducer from 'remote_two/reducer';
 
-const federatedSlices = {
-  remote_one: await import("remote_one/reducer").then(
-    (module) => module.default
-  ),
-  remote_two: await import("remote_two/reducer").then(
-    (module) => module.default
-  ),
-};
+export interface RootState extends
+  RemoteOne.State,
+  RemoteTwo.State {}
 
-const initStore = async () => {
-  const store = configureStore({
-    reducer: combineReducers({
-      ...federatedSlices,
-    }),
-  });
-  return store;
-}
+const reducer = combineReducers<RootState>({
+  remote_one: remoteOneReducer,
+  remote_two: remoteTwoReducer,
+});
 
-export default initStore;
+export const store = configureStore<RootState>({ reducer });
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
