@@ -56,6 +56,13 @@ export default defineConfig({
       'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
     }
   },
+  dev: {
+    // It is necessary to configure assetPrefix, and in the production build, you need to configure output.assetPrefix
+    assetPrefix: 'http://localhost:3000',
+  },
+  output: {
+    assetPrefix: 'https://yourdomain.com',
+  },
   tools: {
     rspack: (_, { appendPlugins }) => {
       appendPlugins([
